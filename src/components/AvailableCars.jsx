@@ -8,7 +8,7 @@ const AvailableCars = async () => {
 //   console.log(cars);
   return (
     <div className="overflow-hidden  py-4 md:py-10 px-6 lg:px-16">
-<div className="mx-auto max-w-7xl">
+<div className="mx-auto w-11/12 md:w-10/12">
     
      <div className="flex justify-between items-center">
          <h2 className=" text-4xl font-bold text-[#CBE4DE]">

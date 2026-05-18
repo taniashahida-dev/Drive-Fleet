@@ -11,7 +11,7 @@ dailyRentPrice}= data
     return (
         <div>
              <div
-            className="group flex flex-col bg-[#2E4F4F] rounded-3xl border border-[#CBE4DE] overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            className="group flex flex-col bg-[#2E4F4F] rounded-3xl border border-[#CBE4DE] overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl shadow-[#2E4F4F]"
         >
             <div className="relative aspect-16/10 overflow-hidden">
                 <Image src={image}
@@ -27,7 +27,7 @@ dailyRentPrice}= data
                         size="sm"
                         color="primary"
                         variant="solid"
-                        className="font-bold text-[10px] text-[#CBE4DE] uppercase"
+                        className={`${availability=='available'?'bg-[#2E4F4F]  text-[#CBE4DE] ':'bg-[#CBE4DE] text-[#2E4F4F]'}p-1 px-3 rounded-full   text-sm m-2 `}
                     >
                        {availability}
                     </Chip>
@@ -43,7 +43,7 @@ dailyRentPrice}= data
 
                 <div className="flex items-center justify-between pt-2 border-t border-[#2C3333]">
                    
-                  <h1 className="font-black text-[#CBE4DE]">${dailyRentPrice}<span className='text-sm text-[#0E8388]/60'>/Day</span></h1>  
+                  <h1 className="font-black text-[#CBE4DE] text-2xl">${dailyRentPrice}<span className='text-sm text-[#0E8388]/60'>/Day</span></h1>  
 <Link href={`/explore/${_id}`}><button className=' text-[#CBE4DE] bg-[#0E8388]/60 p-2 px-4 md:px-5 rounded-4xl'>Details</button></Link>
                 </div>
             </div>
