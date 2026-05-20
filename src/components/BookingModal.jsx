@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { X, Car, MapPin, Users, Calendar, Shield } from "lucide-react";
 
+import { PostbookingData } from "@/lib/action";
+
+
 // ─── Modal Component ───────────────────────────────────────────────
 function BookingModal({ car, isOpen, onClose }) {
   const [driverNeeded, setDriverNeeded] = useState(false);
@@ -11,23 +14,29 @@ function BookingModal({ car, isOpen, onClose }) {
   const [success, setSuccess] = useState(false);
 
   if (!isOpen) return null;
+ 
 
   const handleBooking = async () => {
     setIsBooking(true);
+
+const bookingData = {
+        carId: car._id,
+        carName: car.name,
+        carType:car.carType,
+        dailyRentPrice: car.dailyRentPrice,
+        driverNeeded,
+        specialNote,
+        bookingDate: new Date().toISOString(),
+      }
 
     // TODO: Replace with your actual API call
     // const res = await fetch("/api/bookings", {
     //   method: "POST",
     //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     carId: car._id,
-    //     carName: car.name,
-    //     dailyRentPrice: car.dailyRentPrice,
-    //     driverNeeded,
-    //     specialNote,
-    //     bookingDate: new Date(),
-    //   }),
+    //   body: JSON.stringify(bookingData),
     // });
+    console.log(bookingData)
+    const postBooking = await PostbookingData(bookingData)
 
     await new Promise((r) => setTimeout(r, 1200)); // simulate API delay
     setIsBooking(false);
@@ -36,6 +45,8 @@ function BookingModal({ car, isOpen, onClose }) {
       setSuccess(false);
       onClose();
     }, 2000);
+
+  
   };
 
   return (
@@ -104,7 +115,7 @@ function BookingModal({ car, isOpen, onClose }) {
         </div>
 
         {/* Booking Date (auto) */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#CBE4DE]/45">
             <Calendar size={11} />
             Booking Date
@@ -123,8 +134,24 @@ function BookingModal({ car, isOpen, onClose }) {
               day: "numeric",
             })}
           </div>
-        </div>
+        </div> */}
+<div className="mb-4">
+  <label className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#CBE4DE]/45">
+    <Calendar size={11} />
+    Booking Date
+  </label>
 
+  <input
+    type="date"
+      min={new Date().toISOString().split("T")[0]}
+    className="w-full rounded-xl px-4 py-3 text-sm font-medium text-[#CBE4DE] outline-none"
+    style={{
+      background: "#2C3333",
+      border: "1px solid rgba(14,131,136,0.18)",
+      colorScheme: "dark",
+    }}
+  />
+</div>
         {/* Driver Toggle */}
         <div className="mb-4">
           <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#CBE4DE]/45">
