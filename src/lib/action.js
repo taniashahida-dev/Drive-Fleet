@@ -26,3 +26,22 @@ export const PostbookingData = async (bookingData) => {
 
   return res.json();
 };
+
+
+export const getUserPostCars = async()=>{
+    const res =await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user-cars`)
+    return res.json()
+}
+
+export const postUserCars = async (carData) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user-cars`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(carData),
+  });
+
+  return res.json();
+
+};

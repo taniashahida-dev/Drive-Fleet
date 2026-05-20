@@ -86,7 +86,7 @@ const Navbar = () => {
 
                                         <hr className="my-2 border-[#E3DBBB]" />
 
-                                        <button  onClick={async () => await authClient.signOut()} className="w-full rounded-3xl px-6 py-3 text-center text-red-600 hover:bg-[#CBE4DE]">
+                                        <button  onClick={async () => await authClient.signOut()} className="w-full rounded-3xl px-6 py-3 text-center  text-red-600 hover:bg-red-400 bg-[#CBE4DE]">
                                             Logout
                                         </button>
                                     </div>
@@ -173,7 +173,7 @@ const Navbar = () => {
                                         Add New Car
                                     </Navlink2>
 
-                                    <button  onClick={async () => await authClient.signOut()} className="w-full rounded-3xl px-6 py-3 text-center text-red-600 border border-red-500/30 hover:bg-red-500/10">
+                                    <button  onClick={async () => await authClient.signOut()} className="w-full rounded-3xl px-6 py-3 text-center  text-red-600 hover:bg-red-400 bg-[#CBE4DE]">
                                         Logout
                                     </button>
                                 </div>
