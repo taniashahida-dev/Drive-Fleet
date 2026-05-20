@@ -1,6 +1,8 @@
 "use client"
 
+import { authClient } from "@/lib/auth-client"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 import {
@@ -15,6 +17,27 @@ import {
 export default function RegisterPage() {
 
     const [password, setPassword] = useState("")
+    const router = useRouter()
+
+    const handleSignUp = async (e) => {
+      e.preventDefault();
+    
+      const formData = new FormData(e.currentTarget);
+    
+      const loginData = Object.fromEntries(formData.entries());
+    
+      const { data, error } = await authClient.signUp.email({
+        ...loginData,
+        
+      });
+    if(error){
+        alert(error.message)
+        return
+    }else{
+        router.push('/login')
+    }
+      
+    };
 
 const passwordValidation =
   /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password)
@@ -52,7 +75,7 @@ const passwordValidation =
           </h2>
 
           {/* Form */}
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSignUp}>
             {/* Full Name */}
             <div>
               <label className="mb-2 block text-sm text-[#CBE4DE]/70">
@@ -63,8 +86,9 @@ const passwordValidation =
                 <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
 
                 <input
+                name="name"
                   type="text"
-                  placeholder="Rafiul Hasan"
+                  placeholder="Enter Your name"
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
                 />
               </div>
@@ -80,6 +104,7 @@ const passwordValidation =
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
 
                 <input
+                name="email"
                   type="email"
                   placeholder="user@email.com"
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
@@ -97,7 +122,8 @@ const passwordValidation =
                 <FaImage className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
 
                 <input
-                  type="text"
+name="image"
+                  type="url"
                   placeholder="https://photo.url/me.jpg"
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
                 />
@@ -115,6 +141,7 @@ const passwordValidation =
     <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
 
     <input
+    name="password"
       type="password"
       placeholder="••••••••"
       value={password}
@@ -137,7 +164,7 @@ const passwordValidation =
  
 
             {/* Register Button */}
-            <button className="h-14 w-full rounded-xl bg-[#0E8388] text-lg font-semibold text-white transition-all duration-300 hover:bg-[#0c7478]">
+            <button type="submit" className="h-14 w-full rounded-xl bg-[#0E8388] text-lg font-semibold text-white transition-all duration-300 hover:bg-[#0c7478]">
               Create Account
             </button>
 

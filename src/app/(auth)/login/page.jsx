@@ -1,5 +1,5 @@
-
-
+'use client'
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link"
 
 import { GrGoogle } from "react-icons/gr"
@@ -8,6 +8,26 @@ import { GrGoogle } from "react-icons/gr"
 import { IoLockOpenOutline, IoMailUnreadOutline } from "react-icons/io5"
 
 export default function LoginPage() {
+
+ const handleLogin = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.currentTarget);
+
+  const loginData = Object.fromEntries(formData.entries());
+
+  const { data, error } = await authClient.signIn.email({
+    ...loginData,
+    callbackURL: "/",
+  });
+
+  if(error){
+    alert(error.message)
+    return
+  }
+};
+
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#2C3333] px-6 py-16 ">
       {/* Background Glow */}
@@ -16,27 +36,12 @@ export default function LoginPage() {
 
       {/* Login Container */}
       <div
-        initial={{
-          opacity: 0,
-          y: 50,
-          scale: 0.95,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          scale: 1,
-        }}
-        transition={{
-          duration: 0.7,
-          ease: "easeOut",
-        }}
+        
         className="relative z-10 w-full max-w-md "
       >
         {/* Logo */}
         <div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+         
           className="mb-10 text-center"
         >
         
@@ -65,7 +70,7 @@ export default function LoginPage() {
             Sign in to your account
           </p>
           {/* Form */}
-          <form className="space-y-6">
+          <form className="space-y-6"  onSubmit={handleLogin}>
             {/* Email */}
             <div>
               <label className="mb-2 block text-sm text-[#CBE4DE]/70">
@@ -78,6 +83,7 @@ export default function LoginPage() {
                
 
                 <input
+                 name="email"
                   type="email"
                   placeholder="user@email.com"
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388] focus:ring-2 focus:ring-[#0E8388]/20"
@@ -97,6 +103,7 @@ export default function LoginPage() {
                 
 
                 <input
+                 name="password"
                   type="password"
                   placeholder="••••••••"
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388] focus:ring-2 focus:ring-[#0E8388]/20"
@@ -106,12 +113,8 @@ export default function LoginPage() {
 
             {/* Login Button */}
             <button
-              whileHover={{
-                scale: 1.02,
-              }}
-              whileTap={{
-                scale: 0.98,
-              }}
+            type="submit"
+             
               className="h-14 w-full rounded-xl bg-[#0E8388] text-lg font-semibold text-white shadow-lg shadow-[#0E8388]/20 transition-all hover:bg-[#0c7478]"
             >
               Login
