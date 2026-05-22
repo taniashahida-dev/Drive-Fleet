@@ -1,6 +1,7 @@
 'use client'
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link"
+import toast from "react-hot-toast";
 
 import { GrGoogle } from "react-icons/gr"
 
@@ -22,8 +23,11 @@ export default function LoginPage() {
   });
 
   if(error){
-    alert(error.message)
+   
+    toast.error(error.message)
     return
+  }else{
+    toast.success("Login Successfull ...")
   }
 };
 

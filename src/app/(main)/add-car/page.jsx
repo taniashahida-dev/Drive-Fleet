@@ -4,6 +4,7 @@ import { postUserCars } from "@/lib/action";
 import { useSession } from "@/lib/auth-client";
 import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const AddCarForm = () => {
  const router = useRouter()
@@ -22,12 +23,13 @@ const userCar =  {
 const postUserCar = await postUserCars(userCar)
  if (!postUserCar?.acknowledged) {
 
-      alert("Added failed")
+    
+      toast.error('Added failed')
 
       return
     }
 
-    alert("Car Added Successfully ✅")
+    toast.success("Car Added Successfully ✅")
 
     router.push("/")
   }

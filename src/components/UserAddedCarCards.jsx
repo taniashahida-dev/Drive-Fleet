@@ -58,7 +58,7 @@ const UserAddedCarCards = ({ car, handleDelete }) => {
           className="flex items-center gap-2 rounded-xl border border-[#0E8388] px-5 py-3 text-sm font-medium text-[#0E8388] transition-all duration-300 hover:bg-[#0E8388] hover:text-white"
         >
           <FaEdit />
-          Edit
+         Update
         </Link>
 
         {/* DELETE */}

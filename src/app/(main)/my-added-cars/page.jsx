@@ -5,6 +5,7 @@ import { useSession } from "@/lib/auth-client"
 import { deleteUserCar, getUserPostCars } from "@/lib/action"
 import UserAddedCarCards from "@/components/UserAddedCarCards"
 import { IdCardIcon } from "lucide-react"
+import toast from "react-hot-toast"
 
 
 const MyAddedCars = () => {
@@ -38,7 +39,7 @@ const MyAddedCars = () => {
 
     if (data.deletedCount > 0) {
 
-      alert("Car Deleted Successfully ✅")
+      toast.success("Car Deleted Successfully ✅")
 
       // UI update
       const remainingCars =
