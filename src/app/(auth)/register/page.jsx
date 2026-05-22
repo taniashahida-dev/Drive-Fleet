@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { authClient } from "@/lib/auth-client"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import toast from "react-hot-toast"
+import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 import {
   FaCarSide,
@@ -13,35 +13,38 @@ import {
   FaImage,
   FaLock,
   FaGoogle,
-} from "react-icons/fa"
+} from "react-icons/fa";
 
 export default function RegisterPage() {
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
-    const [password, setPassword] = useState("")
-    const router = useRouter()
+  const handleSignUp = async (e) => {
+    e.preventDefault();
 
-    const handleSignUp = async (e) => {
-      e.preventDefault();
-    
-      const formData = new FormData(e.currentTarget);
-    
-      const loginData = Object.fromEntries(formData.entries());
-    
-      const { data, error } = await authClient.signUp.email({
-        ...loginData,
-        
-      });
-    if(error){
-        toast.error(error.message)
-        return
-    }else{
-        router.push('/login')
+    const formData = new FormData(e.currentTarget);
+
+    const loginData = Object.fromEntries(formData.entries());
+
+    const { data, error } = await authClient.signUp.email({
+      ...loginData,
+    });
+    if (error) {
+      toast.error(error.message);
+      return;
+    } else {
+      router.push("/login");
     }
-      
-    };
+  };
 
-const passwordValidation =
-  /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password)
+  const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password);
+
+  const googleSignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#2C3333] px-6 py-16">
       {/* Background Glow */}
@@ -53,19 +56,12 @@ const passwordValidation =
         {/* Logo */}
         <div className="mb-10 text-center">
           <div className="flex items-center justify-center gap-3">
-            <FaCarSide
-              size={28}
-              className="text-[#0E8388]"
-            />
+            <FaCarSide size={28} className="text-[#0E8388]" />
 
-            <h1 className="text-4xl font-bold text-[#0E8388]">
-              DriveFleet
-            </h1>
+            <h1 className="text-4xl font-bold text-[#0E8388]">DriveFleet</h1>
           </div>
 
-          <p className="mt-3 text-[#CBE4DE]/60">
-            Create your account
-          </p>
+          <p className="mt-3 text-[#CBE4DE]/60">Create your account</p>
         </div>
 
         {/* Card */}
@@ -87,7 +83,7 @@ const passwordValidation =
                 <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
 
                 <input
-                name="name"
+                  name="name"
                   type="text"
                   placeholder="Enter Your name"
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
@@ -105,7 +101,7 @@ const passwordValidation =
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
 
                 <input
-                name="email"
+                  name="email"
                   type="email"
                   placeholder="user@email.com"
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
@@ -123,7 +119,7 @@ const passwordValidation =
                 <FaImage className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
 
                 <input
-name="image"
+                  name="image"
                   type="url"
                   placeholder="https://photo.url/me.jpg"
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
@@ -132,40 +128,38 @@ name="image"
             </div>
 
             {/* Password */}
-           {/* Password */}
-<div>
-  <label className="mb-2 block text-sm text-[#CBE4DE]/70">
-    Password
-  </label>
+            {/* Password */}
+            <div>
+              <label className="mb-2 block text-sm text-[#CBE4DE]/70">
+                Password
+              </label>
 
-  <div className="relative">
-    <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
+              <div className="relative">
+                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0E8388]" />
 
-    <input
-    name="password"
-      type="password"
-      placeholder="••••••••"
-      value={password}
-      onChange={(e) =>
-        setPassword(e.target.value)
-      }
-      className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
-    />
-  </div>
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
+                />
+              </div>
 
-  {/* Validation Message */}
-  {password.length > 0 &&
-    !passwordValidation && (
-      <p className="mt-2 text-sm text-red-400">
-        Must have uppercase,
-        lowercase & min 6 chars
-      </p>
-    )}
-</div>
- 
+              {/* Validation Message */}
+              {password.length > 0 && !passwordValidation && (
+                <p className="mt-2 text-sm text-red-400">
+                  Must have uppercase, lowercase & min 6 chars
+                </p>
+              )}
+            </div>
 
             {/* Register Button */}
-            <button type="submit" className="h-14 w-full rounded-xl bg-[#0E8388] text-lg font-semibold text-white transition-all duration-300 hover:bg-[#0c7478]">
+            <button
+              type="submit"
+              className="h-14 w-full rounded-xl bg-[#0E8388] text-lg font-semibold text-white transition-all duration-300 hover:bg-[#0c7478]"
+            >
               Create Account
             </button>
 
@@ -173,17 +167,18 @@ name="image"
             <div className="flex items-center gap-4 py-1">
               <div className="h-px flex-1 bg-[#CBE4DE]/10" />
 
-              <span className="text-sm text-[#CBE4DE]/40">
-                OR
-              </span>
+              <span className="text-sm text-[#CBE4DE]/40">OR</span>
 
               <div className="h-px flex-1 bg-[#CBE4DE]/10" />
             </div>
 
             {/* Google Button */}
-            <button className="flex h-14 w-full items-center justify-center gap-3 rounded-xl border border-[#0E8388]/20 bg-[#2C3333] text-[#CBE4DE] transition-all duration-300 hover:border-[#0E8388]/40 hover:bg-[#2C3333]/80">
+            <button
+              type="button"
+              onClick={googleSignIn}
+              className="flex h-14 w-full items-center justify-center gap-3 rounded-xl border border-[#0E8388]/20 bg-[#2C3333] text-[#CBE4DE] transition-all duration-300 hover:border-[#0E8388]/40 hover:bg-[#2C3333]/80"
+            >
               <FaGoogle className="text-[#0E8388]" />
-
               Continue with Google
             </button>
           </form>
@@ -201,5 +196,5 @@ name="image"
         </div>
       </div>
     </section>
-  )
+  );
 }

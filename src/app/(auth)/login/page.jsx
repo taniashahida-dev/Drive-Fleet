@@ -30,6 +30,11 @@ export default function LoginPage() {
     toast.success("Login Successfull ...")
   }
 };
+const googleSignIn = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+  });
+};
 
 
   return (
@@ -137,7 +142,8 @@ export default function LoginPage() {
 
             {/* Google Button */}
             <button
-             
+             type="button"
+  onClick={googleSignIn}
               className="flex h-14 w-full items-center justify-center gap-3 rounded-xl border border-[#0E8388]/10 bg-[#2C3333] text-[#CBE4DE] transition-all hover:border-[#0E8388]/30 hover:bg-[#2C3333]/80 hover:mb-10"
             >
               <GrGoogle size={20}
