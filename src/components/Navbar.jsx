@@ -34,7 +34,7 @@ const handleLogOut = async () => {
 
                     {/* Logo */}
                     <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-[#0E8388]">
-                        DriveFleet
+                        DriveNest
                     </h1>
 
                     {/* Desktop Menu */}

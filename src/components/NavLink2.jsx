@@ -28,7 +28,7 @@ const Navlink2 = ({ href, children }) => {
           transition-all duration-300
           hover:bg-[#CBE4DE]
           hover:text-[#0E8388]
-          my-2
+          md:my-2
         `}
       >
         {children}

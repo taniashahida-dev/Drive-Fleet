@@ -1,14 +1,17 @@
 'use client'
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link"
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 import { GrGoogle } from "react-icons/gr"
 
 
 import { IoLockOpenOutline, IoMailUnreadOutline } from "react-icons/io5"
+import { PiEye, PiEyeClosed } from "react-icons/pi";
 
 export default function LoginPage() {
+  const [hidePass,setHidePass] = useState(true)
 
  const handleLogin = async (e) => {
   e.preventDefault();
@@ -56,7 +59,7 @@ const googleSignIn = async () => {
         
 
             <h1 className="text-4xl font-bold text-[#0E8388]">
-              DriveFleet
+              DriveNest
             </h1>
          
 
@@ -113,10 +116,16 @@ const googleSignIn = async () => {
 
                 <input
                  name="password"
-                  type="password"
+                  type={`${hidePass? "password":"text"}`}
                   placeholder="••••••••"
-                  className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388] focus:ring-2 focus:ring-[#0E8388]/20"
+                  className=" h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388] focus:ring-2 focus:ring-[#0E8388]/20"
                 />
+
+                <span onClick={()=>setHidePass(!hidePass)} className="text-[#CBE4DE] absolute top-4.5 right-3 cursor-pointer">
+                  {
+hidePass?<PiEyeClosed />:<PiEye />
+                  }
+                </span>
               </div>
             </div>
 

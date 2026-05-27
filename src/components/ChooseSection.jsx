@@ -68,7 +68,7 @@ const ChooseSection = () => {
         >
           Why Choose{" "}
           <span className="text-[#0E8388]">
-            DriveFleet?
+            DriveNest?
           </span>
         </motion.h2>
 

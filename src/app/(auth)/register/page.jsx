@@ -14,9 +14,11 @@ import {
   FaLock,
   FaGoogle,
 } from "react-icons/fa";
+import { PiEye, PiEyeClosed } from "react-icons/pi";
 
 export default function RegisterPage() {
   const [password, setPassword] = useState("");
+   const [hidePass,setHidePass] = useState(true)
   const router = useRouter();
 
   const handleSignUp = async (e) => {
@@ -40,6 +42,8 @@ export default function RegisterPage() {
   const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password);
 
   const googleSignIn = async () => {
+
+     
     const data = await authClient.signIn.social({
       provider: "google",
     });
@@ -58,7 +62,7 @@ export default function RegisterPage() {
           <div className="flex items-center justify-center gap-3">
             <FaCarSide size={28} className="text-[#0E8388]" />
 
-            <h1 className="text-4xl font-bold text-[#0E8388]">DriveFleet</h1>
+            <h1 className="text-4xl font-bold text-[#0E8388]">DriveNest</h1>
           </div>
 
           <p className="mt-3 text-[#CBE4DE]/60">Create your account</p>
@@ -139,12 +143,17 @@ export default function RegisterPage() {
 
                 <input
                   name="password"
-                  type="password"
+                   type={`${hidePass? "password":"text"}`}
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="h-14 w-full rounded-xl border border-[#0E8388]/10 bg-[#2C3333] pl-12 pr-4 text-[#CBE4DE] outline-none transition-all placeholder:text-[#CBE4DE]/30 focus:border-[#0E8388]"
                 />
+                 <span onClick={()=>setHidePass(!hidePass)} className="text-[#CBE4DE] absolute top-4.5 right-3 cursor-pointer">
+                                  {
+                hidePass?<PiEyeClosed />:<PiEye />
+                                  }
+                                </span>
               </div>
 
               {/* Validation Message */}

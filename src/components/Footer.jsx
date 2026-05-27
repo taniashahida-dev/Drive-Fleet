@@ -51,7 +51,7 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <h2 className="text-2xl font-bold uppercase tracking-wide text-[#0E8388]">
-              DriveFleet
+              DriveNest
             </h2>
 
             <p className="mt-5 max-w-sm leading-relaxed text-[#CBE4DE]/65">
@@ -101,9 +101,9 @@ export default function Footer() {
             </h3>
 
             <div className="mt-5 space-y-3 text-[#CBE4DE]/65">
-              <p>support@drivefleet.com</p>
+              <p>support@drivenest.com</p>
               <p>+1 (800) 555-DRIVE</p>
-              <p>123 Fleet Avenue, NY</p>
+              <p>123 Nest Avenue, NY</p>
             </div>
           </motion.div>
         </div>
@@ -121,7 +121,7 @@ export default function Footer() {
             viewport={{ once: true }}
             className="text-sm text-[#CBE4DE]/50"
           >
-            © 2025 DriveFleet. All rights reserved.
+            © 2025 DriveNest. All rights reserved.
           </motion.p>
 
           {/* Social Icons */}
